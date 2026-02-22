@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN"
+    "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
+<glassfish-web-app error-url="">
+
+    <!-- Kontextstamm -->
+    <context-root>/ideaboard</context-root>
+
+    <!-- Klassenlade-Konfiguration -->
+    <class-loader delegate="true"/>
+
+    <!-- JSP-Konfiguration -->
+    <jsp-config>
+        <property name="keepgenerated" value="true"/>
+    </jsp-config>
+
+    <!-- Ressourcenreferenzen -->
+    <resource-ref>
+        <res-ref-name>jdbc/ideaboard</res-ref-name>
+        <jndi-name>jdbc/ideaboard</jndi-name>
+    </resource-ref>
+
+    <!-- Sicherheitsrollenmapping -->
+    <security-role-mapping>
+        <role-name>ADMIN</role-name>
+        <group-name>ADMIN</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>PROJECT_MANAGER</role-name>
+        <group-name>PROJECT_MANAGER</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>EMPLOYEE</role-name>
+        <group-name>EMPLOYEE</group-name>
+    </security-role-mapping>
+
+    <!-- Parametercodierung -->
+    <parameter-encoding default-charset="UTF-8"/>
+
+</glassfish-web-app>

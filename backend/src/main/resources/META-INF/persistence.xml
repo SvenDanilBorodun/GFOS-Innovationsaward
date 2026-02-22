@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="IdeaBoardPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/ideaboard</jta-data-source>
+
+        <!-- Entitätsklassen -->
+        <class>com.gfos.ideaboard.entity.User</class>
+        <class>com.gfos.ideaboard.entity.Idea</class>
+        <class>com.gfos.ideaboard.entity.Like</class>
+        <class>com.gfos.ideaboard.entity.Comment</class>
+        <class>com.gfos.ideaboard.entity.CommentReaction</class>
+        <class>com.gfos.ideaboard.entity.ChecklistItem</class>
+        <class>com.gfos.ideaboard.entity.FileAttachment</class>
+        <class>com.gfos.ideaboard.entity.Survey</class>
+        <class>com.gfos.ideaboard.entity.SurveyOption</class>
+        <class>com.gfos.ideaboard.entity.SurveyVote</class>
+        <class>com.gfos.ideaboard.entity.Badge</class>
+        <class>com.gfos.ideaboard.entity.UserBadge</class>
+        <class>com.gfos.ideaboard.entity.AuditLog</class>
+        <class>com.gfos.ideaboard.entity.Notification</class>
+        <class>com.gfos.ideaboard.entity.Message</class>
+        <class>com.gfos.ideaboard.entity.IdeaGroup</class>
+        <class>com.gfos.ideaboard.entity.GroupMember</class>
+        <class>com.gfos.ideaboard.entity.GroupMessage</class>
+        <class>com.gfos.ideaboard.entity.GroupMessageRead</class>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <!-- EclipseLink-Eigenschaften -->
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+
+            <!-- Verbindungspool-Einstellungen -->
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+            <property name="eclipselink.jdbc.batch-writing.size" value="100"/>
+
+            <!-- Cache-Einstellungen - auf false für Entwicklung setzen, um veraltete Datenproblemen zu vermeiden -->
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.cache.size.default" value="500"/>
+        </properties>
+    </persistence-unit>
+</persistence>

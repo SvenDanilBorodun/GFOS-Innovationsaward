@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo-Modus aktivieren - GFOS IdeaBoard</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background: #f3f4f6;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #1f2937;
+      margin-top: 0;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    .success {
+      background: #10b981;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 20px;
+      display: none;
+    }
+    .info {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 12px;
+      margin-top: 20px;
+      color: #1e40af;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎭 GFOS IdeaBoard - Demo-Modus</h1>
+    <p>Da das Backend nicht läuft, können Sie den <strong>Demo-Modus</strong> aktivieren, um die Benutzeroberfläche mit Testdaten zu erkunden.</p>
+
+    <div class="info">
+      <strong>Hinweis:</strong> Dies richtet einen gefälschten Benutzer in localStorage ein. Es findet keine echte Authentifizierung statt.
+    </div>
+
+    <h3>Wählen Sie einen Demo-Benutzer:</h3>
+
+    <button onclick="enableDemo('EMPLOYEE')">
+      👤 Mitarbeiter-Demo (John Smith)
+    </button>
+
+    <button onclick="enableDemo('PROJECT_MANAGER')">
+      📊 Projektmanager-Demo (Mary Wilson)
+    </button>
+
+    <button onclick="enableDemo('ADMIN')">
+      👑 Administrator-Demo (System Administrator)
+    </button>
+
+    <button onclick="clearDemo()" style="background: #dc2626; margin-top: 20px;">
+      🗑️ Demo-Modus löschen
+    </button>
+
+    <div id="success" class="success"></div>
+  </div>
+
+  <script>
+    function enableDemo(role) {
+      const demoUsers = {
+        EMPLOYEE: {
+          id: 2,
+          username: 'jsmith',
+          email: 'john.smith@gfos.com',
+          firstName: 'John',
+          lastName: 'Smith',
+          role: 'EMPLOYEE',
+          avatarUrl: null,
+          xpPoints: 150,
+          level: 2,
+          isActive: true,
+          lastLogin: new Date().toISOString(),
+          createdAt: '2024-01-01T00:00:00',
+          updatedAt: new Date().toISOString()
+        },
+        PROJECT_MANAGER: {
+          id: 3,
+          username: 'mwilson',
+          email: 'mary.wilson@gfos.com',
+          firstName: 'Mary',
+          lastName: 'Wilson',
+          role: 'PROJECT_MANAGER',
+          avatarUrl: null,
+          xpPoints: 350,
+          level: 3,
+          isActive: true,
+          lastLogin: new Date().toISOString(),
+          createdAt: '2024-01-01T00:00:00',
+          updatedAt: new Date().toISOString()
+        },
+        ADMIN: {
+          id: 1,
+          username: 'admin',
+          email: 'admin@gfos.com',
+          firstName: 'System',
+          lastName: 'Administrator',
+          role: 'ADMIN',
+          avatarUrl: null,
+          xpPoints: 0,
+          level: 1,
+          isActive: true,
+          lastLogin: new Date().toISOString(),
+          createdAt: '2024-01-01T00:00:00',
+          updatedAt: new Date().toISOString()
+        }
+      };
+
+      const user = demoUsers[role];
+      const demoToken = 'demo-token-' + Date.now();
+
+      localStorage.setItem('ideaboard_token', demoToken);
+      localStorage.setItem('ideaboard_user', JSON.stringify(user));
+      localStorage.setItem('ideaboard_demo_mode', 'true');
+
+      const successEl = document.getElementById('success');
+      successEl.textContent = `✅ Demo-Modus aktiviert! Sie sind jetzt angemeldet als ${user.firstName} ${user.lastName} (${role}).`;
+      successEl.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1500);
+    }
+
+    function clearDemo() {
+      localStorage.removeItem('ideaboard_token');
+      localStorage.removeItem('ideaboard_refresh_token');
+      localStorage.removeItem('ideaboard_user');
+      localStorage.removeItem('ideaboard_demo_mode');
+
+      const successEl = document.getElementById('success');
+      successEl.textContent = '✅ Demo-Modus gelöscht! Sie können jetzt das echte Backend verwenden, wenn es läuft.';
+      successEl.style.display = 'block';
+      successEl.style.background = '#dc2626';
+
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1500);
+    }
+
+    // Prüfen, ob bereits im Demo-Modus
+    if (localStorage.getItem('ideaboard_demo_mode')) {
+      const user = JSON.parse(localStorage.getItem('ideaboard_user'));
+      const successEl = document.getElementById('success');
+      successEl.textContent = `ℹ️ Demo-Modus ist aktiv: ${user.firstName} ${user.lastName} (${user.role})`;
+      successEl.style.display = 'block';
+      successEl.style.background = '#3b82f6';
+    }
+  </script>
+</body>
+</html>

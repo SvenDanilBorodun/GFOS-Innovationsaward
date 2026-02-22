@@ -1,0 +1,237 @@
+# GFOS Digital Idea Board - Git Ignore File
+
+# ============================================
+# Frontend (React/Vite)
+# ============================================
+
+# Dependencies
+frontend/node_modules/
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
+
+# Build output
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# Environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# Editor directories and files
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+frontend/.idea
+frontend/.DS_Store
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# ============================================
+# Backend (Maven/Java)
+# ============================================
+
+# Compiled class files
+backend/target/
+backend/out/
+backend/build/
+backend/*.class
+
+# Maven
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Package Files
+backend/*.jar
+backend/*.war
+backend/*.nar
+backend/*.ear
+backend/*.zip
+backend/*.tar.gz
+backend/*.rar
+
+# Eclipse
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# IntelliJ IDEA
+backend/.idea/
+backend/*.iml
+backend/*.iws
+backend/*.ipr
+
+# NetBeans
+backend/nbproject/
+backend/nbbuild/
+backend/nbdist/
+backend/.nb-gradle/
+
+# VS Code
+backend/.vscode/
+
+# Logs
+backend/*.log
+backend/logs/
+
+# ============================================
+# Database
+# ============================================
+
+# Database files (if using local SQLite for testing)
+*.db
+*.sqlite
+*.sqlite3
+
+# Database dumps
+*.sql.backup
+*.dump
+
+# ============================================
+# GlassFish
+# ============================================
+
+# GlassFish domain files (if accidentally copied)
+glassfish/
+glassfish7/
+
+# Deployment descriptors backup
+*.xml.bak
+
+# ============================================
+# Operating System Files
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# ============================================
+# IDE and Editor Files
+# ============================================
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.metadata
+.settings/
+.project
+.classpath
+*.launch
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# ============================================
+# Temporary Files
+# ============================================
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# ============================================
+# Application Specific
+# ============================================
+
+# Uploaded files directory (if not using external storage)
+uploads/
+backend/uploads/
+
+# Configuration files with sensitive data
+*.properties.local
+application-local.properties
+application-dev.properties
+
+# ============================================
+# Documentation Build
+# ============================================
+
+# Generated documentation
+docs/_build/
+site/
+
+# ============================================
+# Testing
+# ============================================
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output/
+
+# Test results
+TEST-*.xml
+junit.xml
+
+# ============================================
+# Security
+# ============================================
+
+# Don't commit sensitive files
+*.pem
+*.key
+*.cert
+*.crt
+secrets.json
+credentials.json
+.env.production
+
+# ============================================
+# Keep These Files
+# ============================================
+
+# Keep git folders
+!.git/
+!.github/
+
+# Keep important config templates
+!**/.gitkeep
