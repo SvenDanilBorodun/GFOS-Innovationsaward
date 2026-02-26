@@ -14,15 +14,26 @@ import java.util.Map;
 @ApplicationScoped
 public class JwtUtil {
 
-    // In der Produktion sollte dies aus einer Umgebungsvariablen oder sicheren Konfiguration geladen werden
-    private static final String SECRET_KEY = "gfos-ideaboard-jwt-secret-key-2026-must-be-at-least-256-bits-long-for-hs256";
+    // In der Produktion soll dies aus einer Umgebungsvariablen oder sicheren Konfiguration geladen werden
+    private static final String DEFAULT_SECRET = "gfos-ideaboard-jwt-secret-key-2026-must-be-at-least-256-bits-long-for-hs256";
     private static final long ACCESS_TOKEN_EXPIRATION = 24 * 60 * 60 * 1000; // 24 Stunden
     private static final long REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000; // 7 Tage
 
     private final SecretKey key;
 
     public JwtUtil() {
-        this.key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+        String secret = System.getenv("JWT_SECRET");
+        if (secret == null || secret.trim().isEmpty()) {
+            secret = System.getProperty("JWT_SECRET");
+        }
+        
+        if (secret == null || secret.trim().isEmpty()) {
+            // Wenn kein Secret konfiguriert ist, generiere eines beim Start.
+            // Dies führt dazu, dass alle Sessions nach einem Neustart ungültig werden (Sicherheitsfeature).
+            this.key = Jwts.SIG.HS256.key().build();
+        } else {
+            this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     public String generateAccessToken(User user) {

@@ -31,11 +31,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (storedToken && storedUser) {
         try {
-          setToken(storedToken);
-          setUser(JSON.parse(storedUser));
-
-          // Token-Gültigkeit überprüfen
+          // Token-Gültigkeit überprüfen, BEVOR der Status auf angemeldet gesetzt wird
           const currentUser = await authService.getCurrentUser();
+
+          setToken(storedToken);
           setUser(currentUser);
           localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
         } catch {
@@ -76,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
-    authService.logout().catch(() => {});
+    authService.logout().catch(() => { });
     handleLogout();
   };
 

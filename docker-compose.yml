@@ -38,6 +38,7 @@ services:
       DB_NAME: ${DB_NAME:-ideaboard}
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "${BACKEND_PORT:-8080}:8080"
       - "${GLASSFISH_ADMIN_PORT:-4848}:4848"
